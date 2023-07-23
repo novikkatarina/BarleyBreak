@@ -1,3 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-Console.WriteLine("Hello, World!");
+﻿class Program
+{
+  static void Main(string[] args)
+  {
+    Board board = new Board(3);
+    board.Print(board.BoardArray);
+    board.IsWin(board.BoardArray);
+  }
+}
