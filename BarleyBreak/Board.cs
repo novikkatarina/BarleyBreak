@@ -42,6 +42,26 @@ public class Board
     }
   }
 
+  public bool CheckValidCombination(string[,] array)
+  {
+    int game_possible = 0;
+
+    for (int row = 0; row < 3; row++)
+    {
+      for (int column = 0; column < 2; column++)
+      {
+        if (Convert.ToInt32(array[row, column]) > Convert.ToInt32(array[row, column + 1]))
+        {
+          game_possible++;
+        }
+      }
+    }
+
+    return game_possible % 2 == 0;
+  }
+
+
+
   public void IsWin(string[,] array)
   {
     int number = 1;
