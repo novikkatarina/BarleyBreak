@@ -2,14 +2,14 @@
 {
   internal class ExitCommand : ICommand
   {
-    protected Game Board { get; private set; }
-    public ExitCommand(Game board)
+    protected Game Game { get; private set; }
+    public ExitCommand(Game game)
     {
-      this.Board = board;
+      this.Game = game;
     }
     public void Execute()
     {
-      Board.Exit();
+      Game.Exit();
     }
   }
 }

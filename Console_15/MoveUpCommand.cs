@@ -2,15 +2,15 @@
 {
   public class MoveUpCommand : ICommand
   {
-    protected Game board { get; private set; }
+    protected Game Game { get; private set; }
 
-    public MoveUpCommand(Game board)
+    public MoveUpCommand(Game game)
     {
-      this.board = board;
+      this.Game = game;
     }
     public void Execute()
     {
-      board.MovePointerUp();
+      Game.MovePointerUp();
     }
   }
 }
