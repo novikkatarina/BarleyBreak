@@ -1,10 +1,19 @@
 public class Board
 {
   public string[,] BoardArray { get; private set; }
+  protected int Width { get; private set; }
+  protected int Height { get; private set; }
+  protected int[] Pointer {  get; private set; }
+  protected bool IsPlaying { get; private set; }
 
   public Board(int size)
   {
     this.BoardArray = FillArray(size);
+    this.Width = size;
+    this.Height = size;
+    this.Pointer = new int[4] { this.Width - 1, this.Height - 1, 0, 0 };
+    Bindings.Initialize(this);
+    this.IsPlaying = true;
   }
 
   public string[,] FillArray(int size)
@@ -60,7 +69,90 @@ public class Board
     return game_possible % 2 == 0;
   }
 
+  // Считываение кнопки и запуск функции
+  public void Input()
+  {
+    do
+    {
+      ConsoleKeyInfo keyPressed = Console.ReadKey();
+      if (Bindings.Commands.ContainsKey(keyPressed.Key.ToString()))
+        Bindings.Commands[keyPressed.Key.ToString()].Execute();
+    }
+    while (this.IsPlaying);
+  }
 
+  // Обновление поля после изменений
+  public void Update()
+  {
+    string temp = this.BoardArray[this.Pointer[0], this.Pointer[1]];
+    this.BoardArray[this.Pointer[0], this.Pointer[1]] = "0";
+    this.BoardArray[this.Pointer[2], this.Pointer[3]] = temp;
+
+    if (this.Pointer[0] == this.Width - 1 && this.Pointer[1] == this.Height - 1)
+    {
+      this.IsWin(this.BoardArray);
+    }
+
+    if(IsPlaying)
+      this.Print(this.BoardArray);
+    }
+
+  // Передвижение указателя вверх
+  public void MovePointerUp()
+  {
+    int temp = this.Pointer[0];
+    if (temp-- > 0)
+    {
+      this.Pointer[2] = this.Pointer[0];
+      this.Pointer[3] = this.Pointer[1];
+
+      this.Pointer[0]--;
+      this.Update();
+    }
+
+  }
+
+  // Передвижение указателя вниз
+  public void MovePointerDown()
+  {
+    int temp = this.Pointer[0];
+    if (temp++ < this.Height - 1)
+    {
+      this.Pointer[2] = this.Pointer[0];
+      this.Pointer[3] = this.Pointer[1];
+
+      this.Pointer[0]++;
+      this.Update();
+    }
+  }
+
+  // Передвижение указателя влево
+  public void MovePointerLeft()
+  {
+    int temp = this.Pointer[1];
+    if (temp-- > 0)
+    {
+      this.Pointer[2] = this.Pointer[0];
+      this.Pointer[3] = this.Pointer[1];
+
+      this.Pointer[1]--;
+      this.Update();
+    }
+  }
+
+  // Передвижение указателя вправо
+  public void MovePointerRight()
+  {
+    int temp = this.Pointer[1];
+    if (temp++ < this.Width - 1)
+    {
+      this.Pointer[2] = this.Pointer[0];
+      this.Pointer[3] = this.Pointer[1];
+
+      this.Pointer[1]++;
+      this.Update();
+    }
+  }
 
   public void IsWin(string[,] array)
   {
@@ -77,7 +169,7 @@ public class Board
     Console.WriteLine("You won!");
   }
 
-// На случай усли нужен массив из чисел от 1 до 9 подряд
+// На случай если нужен массив из чисел от 1 до 9 подряд
   public string[,] FillArray2(int size)
   {
     string[,] array = new String[size, size];
