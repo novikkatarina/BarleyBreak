@@ -1,4 +1,4 @@
-﻿namespace Console_15
+﻿namespace TheGame
 {
   public class MoveLeftCommand : ICommand
   {
@@ -10,7 +10,7 @@
     }
     public void Execute()
     {
-      Game.MovePointerLeft();
+      LogicEngine.MovePointerLeft(Game);
     }
   }
 }

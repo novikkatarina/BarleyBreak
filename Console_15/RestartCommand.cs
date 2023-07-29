@@ -1,11 +1,11 @@
-﻿namespace Console_15
+﻿namespace TheGame
 {
   class RestartCommand : ICommand
   {
     protected Game Game { get; private set; }
     public RestartCommand(Game game)
     {
-      this.Game = game;
+      Game = game;
     }
 
     public void Execute()

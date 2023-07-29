@@ -1,4 +1,4 @@
-﻿namespace Console_15
+﻿namespace TheGame
 {
   public class MoveDownCommand : ICommand
   {
@@ -6,11 +6,11 @@
 
     public MoveDownCommand(Game game)
     {
-      this.Game = game;
+      Game = game;
     }
     public void Execute()
     {
-      Game.MovePointerDown();
+      LogicEngine.MovePointerDown(Game);
     }
   }
 }
