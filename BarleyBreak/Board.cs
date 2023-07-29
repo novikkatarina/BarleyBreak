@@ -40,11 +40,35 @@ public class Board
 
   public void Print(string[,] array)
   {
+    Console.SetWindowSize(40, 20);
+    Console.Clear();
+    Console.WriteLine("Игра пятнашки (3х3)");
+    Console.WriteLine(string.Empty);
+    Console.WriteLine("Правила игры:");
+    Console.WriteLine("выстроить заначения в ячейках");
+    Console.WriteLine("в правильном порядке от 1 до 8,");
+    Console.WriteLine("пустая клетка должна быть");
+    Console.WriteLine("в правом нижнем углу.");
+    Console.WriteLine(string.Empty);
+    Console.WriteLine("Управление:");
+    Console.WriteLine("Используйте клавиши ▲, ▼, ◄ и ► ");
+    Console.WriteLine("для перемещения клетки в пустую ячейку");
+    Console.WriteLine(string.Empty);
+
     for (int i = 0; i < 3; i++)
     {
+      Console.WriteLine(string.Empty);
+      Console.Write($"\t");
       for (int j = 0; j < 3; j++)
       {
-        Console.Write($"[{array[i, j]}]\t");
+        if (array[i, j] == "0")
+        {
+          Console.Write($"[ ]\t");
+        }
+        else
+        {
+          Console.Write($"[{array[i, j]}]\t");
+        }
       }
 
       Console.WriteLine();
@@ -161,7 +185,11 @@ public class Board
     {
       for (int j = 0; j < 3; j++)
       {
-        if (array[i, j] != number.ToString()) return;
+        if (array[i, j] != number.ToString())
+        {
+          
+          return;
+        } ;
         number++;
       }
     }
@@ -178,7 +206,7 @@ public class Board
     {
       for (int j = 0; j < 3; j++)
       {
-        array[i, j] = number.ToString();
+        this.IsPlaying = false;
         number++;
       }
     }
