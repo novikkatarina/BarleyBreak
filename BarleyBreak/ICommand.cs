@@ -1,4 +1,4 @@
-﻿namespace TheGame
+﻿namespace BarleyBreak
 {
   internal interface ICommand
   {

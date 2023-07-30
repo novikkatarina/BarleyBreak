@@ -1,4 +1,4 @@
-﻿namespace TheGame
+﻿namespace BarleyBreak
 {
   internal class ExitCommand : ICommand
   {

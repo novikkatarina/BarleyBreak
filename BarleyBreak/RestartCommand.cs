@@ -1,4 +1,4 @@
-﻿namespace TheGame
+﻿namespace BarleyBreak
 {
   class RestartCommand : ICommand
   {

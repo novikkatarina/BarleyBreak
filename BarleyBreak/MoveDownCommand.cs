@@ -1,4 +1,4 @@
-﻿namespace TheGame
+﻿namespace BarleyBreak
 {
   public class MoveDownCommand : ICommand
   {

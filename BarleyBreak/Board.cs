@@ -1,4 +1,4 @@
-﻿namespace TheGame
+﻿namespace BarleyBreak
 {
   public class Board
   {
@@ -17,9 +17,9 @@
     // Заполнение матрицы Пятнашек числами
     public void Fill()
     {
-      this.Array = new int[this.Params[1], this.Params[0]];
+      Array = new int[Params[1], Params[0]];
       Random rnd = new Random();
-      int maxValue = this.Params[0] * this.Params[1];
+      int maxValue = Params[0] * Params[1];
       IEnumerable<int> numbers = Enumerable.Range(1, maxValue - 1);
 
       // Перемешивание коллекции в случайном порядке
@@ -27,30 +27,32 @@
       IEnumerator<int> currentNumber = numbers.GetEnumerator();
 
       // Заполнение двумерного массива числами из перемешанной одномерной коллекции
-      for (int i = 0; i < this.Params[1]; i++)
+      for (int i = 0; i < Params[1]; i++)
       {
-        for (int j = 0; j < this.Params[0]; j++)
+        for (int j = 0; j < Params[0]; j++)
         {
-          this.Array[i, j] = currentNumber.Current;
+          Array[i, j] = currentNumber.Current;
           currentNumber.MoveNext();
         }
       }
       // Перемена первого и последнего элементов для пустой клетки в конце
-      int temp = this.Array[this.Params[1] - 1, this.Params[0] - 1];
-      this.Array[this.Params[1] - 1, this.Params[0] - 1] = 0;
-      this.Array[0, 0] = temp;
-      this.Pointer = new int[4] { this.Params[1] - 1, this.Params[0] - 1, this.Params[1] - 1, this.Params[0] - 1 };
+      int temp = Array[Params[1] - 1, Params[0] - 1];
+      Array[Params[1] - 1, Params[0] - 1] = 0;
+      Array[0, 0] = temp;
+      Pointer = new int[4] { Params[1] - 1, Params[0] - 1, Params[1] - 1, Params[0] - 1 };
     }
 
     // Отрисовка матрицы Пятнашек
     public void Print()
     {
       Console.Clear();
-      Console.WriteLine("Пятнашки!\nСоставьте все цифры по порядку слева\nнаправо (с переносом на новую строку):\n");
+      Console.WriteLine("Игра Пятнашки!\n\nПравила игры:");
+      Console.WriteLine("Выстроить заначения в ячейках в правильном порядке:\nслева направо от 1 до N с переносом строки.\nПустая клетка должна быть в правом нижнем углу.\n\n");
+
       string tableRow = "";
-      for (int i = 0; i < this.Params[1]; i++)
+      for (int i = 0; i < Params[1]; i++)
       {
-        for (int j = 0; j < this.Params[0]; j++)
+        for (int j = 0; j < Params[0]; j++)
         {
           if (Array[i, j] == 0)
           {
@@ -58,26 +60,27 @@
             tableRow += "[   ]\t";
             continue;
           }
-          tableRow += "[ " + this.Array[i, j] + " ]\t";
+          tableRow += "[ " + Array[i, j] + " ]\t";
         }
         Console.WriteLine(tableRow + "\n");
         tableRow = "";
       }
-      Console.WriteLine("\nСправка:\n- Перемещение ячеек - СТРЕЛКИ\n- Перезапуск - \"R\"\n- Выход - \"E\"");
+      Console.WriteLine("Управление:");
+      Console.WriteLine("Используйте клавиши ▲, ▼, ◄ и ► для перемещения клетки в пустую ячейку.\nДля рестарта - \"R\", для выхода - \"E\".\n");
     }
 
     // Сброс значений доски
     public void Reset()
     {
-      this.Pointer = new int[4] { 0, 0, 0, 0, };
-      this.Params = new int[2] { 0, 0 };
+      Pointer = new int[4] { 0, 0, 0, 0, };
+      Params = new int[2] { 0, 0 };
     }
 
     public Board()
     {
-      this.Pointer = new int[4] { 0, 0, 0, 0, };
-      this.Params = new int[2] { 0, 0 };
-      this.Limiter = 4;
+      Pointer = new int[4] { 0, 0, 0, 0, };
+      Params = new int[2] { 0, 0 };
+      Limiter = 4;
     }
   }
 }

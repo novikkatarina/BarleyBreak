@@ -1,4 +1,4 @@
-﻿namespace TheGame
+﻿namespace BarleyBreak
 {
   public class MoveLeftCommand : ICommand
   {
@@ -6,7 +6,7 @@
 
     public MoveLeftCommand(Game game)
     {
-      this.Game = game;
+      Game = game;
     }
     public void Execute()
     {
